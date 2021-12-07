@@ -30,52 +30,29 @@ function toggleShowDetails(showID) {
 	showDetails.classList.toggle("active");
 }
 
+const loadVideosButton = document.querySelector("section.videos .button");
+const videosContainer = document.querySelector("section.videos .container");
+loadVideosButton.addEventListener("click", function() {
+	loadVideosButton.remove();
+	loadContent("extra-videos.php", videosContainer);
+});
 
-// function verifyContactForm() {
-// 	let formName = document.querySelector("section.contact input[id='name']").value;
-// 	let formNameLabel = document.querySelector("section.contact label[for='name']");
+const loadPhotosButton = document.querySelector("section.photos .button");
+const photosContainer = document.querySelector("section.photos .container");
+loadPhotosButton.addEventListener("click", function() {
+	loadPhotosButton.remove();
+	loadContent("extra-photos.php", photosContainer);
+});
 
-// 	let formDate = document.querySelector("section.contact input[id='date']").value;
-// 	let formDateLabel = document.querySelector("section.contact label[for='date']");
+function loadContent(file, container) {
+	let xhr = new XMLHttpRequest();
 
-// 	let formPhone = document.querySelector("section.contact input[id='phone']").value;
-// 	let formPhoneLabel = document.querySelector("section.contact label[for='phone']");
+	xhr.open("GET", "includes/" + file, true);
+	xhr.onload = function() {
+		if (this.status == 200) {
+			container.insertAdjacentHTML("beforeend", this.responseText);
+		}
+	}
 
-// 	let formEmail = document.querySelector("section.contact input[id='email']").value;
-// 	let formEmailLabel = document.querySelector("section.contact label[for='email']");
-
-// 	let formComments = "pie"; //document.querySelector("section.contact input[id='comments']").value;
-
-// 	console.log("RUNNING");
-// 	// User is engaging with contact form.
-// 	if (formName !== "" || formDate !== "" || formPhone !== "" || formEmail !== "" || formComments !== "") {
-// 		verifyInput(formName, formNameLabel);
-// 		verifyInput(formDate, formDateLabel);
-// 		verifyPhoneNumber(formPhone, formPhoneLabel);
-// 		verifyInput(formEmail, formEmailLabel);
-// 	}
-// }
-
-// function verifyInput(formInput, formInputLabel) {
-// 	if (formInput === "") {
-// 		formInputLabel.textContent = "Required";
-// 		return false;
-// 	} else {
-// 		formInputLabel.textContent = "";
-// 		return true;
-// 	}
-// }
-
-// const phoneNumberRegex = "/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im";
-// function verifyPhoneNumber(formInput, formInputLabel) {
-// 	if (verifyInput(formInput, formInputLabel)) {
-// 		if (phoneNumberRegex.match(formInput)) {
-// 			formInputLabel.textContent = "";
-// 		} else {
-// 			formInputLabel.textContent = "Please enter a valid phone number.";
-// 		}
-// 	}
-// }
-
-// const form = document.querySelector("section.contact");
-// form.addEventListener("click", verifyContactForm);
+	xhr.send();
+}

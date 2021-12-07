@@ -46,14 +46,9 @@
 			<div class="container">
 				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/kDrH464kTL4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/Vitf99a34Cc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/nJVqmWPC810" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/Hf83ez2HjKA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/GSEbOuwZ8PQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/1eaq4eJ4AaA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/7qPCViR42lI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/22uh3KkchdY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/dhfSBED3Gec" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/nJVqmWPC810" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>	
 			</div>
+			<button type="button" class="button">See More Videos</a>
 		</section>
 		<!-- Photos -->
 		<section class="photos" id="photos">
@@ -64,20 +59,8 @@
 				<div class="img"><img src="images/badge-20.jpg" /></div>
 				<div class="img"><img src="images/badge-16.jpg" /></div>
 				<div class="img"><img src="images/badge-15.jpg" /></div>
-				<div class="img"><img src="images/badge-19.jpg" /></div>
-				<div class="img"><img src="images/badge-21.jpg" /></div>
-				<div class="img"><img src="images/badge-22.jpg" /></div>
-				<div class="img"><img src="images/badge-5.jpg" /></div>
-				<div class="img"><img src="images/badge-9.jpg" /></div>
-				<div class="img"><img src="images/badge-14.jpg" /></div>
-				<div class="img"><img src="images/badge-12.jpg" /></div>
-				<div class="img"><img src="images/badge-10.jpg" /></div>
-				<div class="img"><img src="images/badge-13.jpg" /></div>
-				<div class="img"><img src="images/badge-25.jpg" /></div>
-				<div class="img"><img src="images/badge-26.jpg" /></div>
-				<div class="img"><img src="images/badge-27.jpg" /></div>
-				<div class="img"><img src="images/badge-peace.png" /></div>
 			</div>
+			<button type="button" class="button">See More Photos</a>
 		</section>
 		<!-- CTA Banner -->
 		<section class="cta-banner">
