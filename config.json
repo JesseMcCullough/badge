@@ -1,0 +1,11 @@
+{
+    "mail": {
+        "name": "Badge",
+        "address": "no-reply@badge.group",
+        "to": [
+            {"name": "Jesse McCullough", "address": "jesse.mccullough@hotmail.com"},
+            {"name": "Jesse McCullough Dev", "address": "jesse@jessem.dev"}
+        ]
+    },
+    "hasShow": false
+}

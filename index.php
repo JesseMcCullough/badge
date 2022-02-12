@@ -1,13 +1,64 @@
+<?php
+
+session_start();
+
+$configString = file_get_contents("../config.json");
+$config = json_decode($configString, true);
+$mail = $config["mail"];
+
+$hasShow = $config["hasShow"];
+
+function getMailHeaders() {
+	global $mail;
+
+	$headers = "From: \"" . $mail["name"] . "\" <" . $mail["address"] . ">\r\n"
+			. "Reply-To: \"" . $mail["name"] . "\" <" . $mail["address"] . ">\r\n";
+
+	$mailToArray = $mail["to"];
+	$mailToArrayCount = count($mailToArray);
+
+	$mailToOthers = "";
+	for ($x = 0; $x < $mailToArrayCount; $x++) {
+		$mailToOthers .= "\"" . $mail["to"][$x]["name"] . "\" <" . $mail["to"][$x]["address"] . ">";
+		if ($x != $mailToArrayCount - 1) { // not last 
+			$mailToOthers .= ",";
+		}
+	}
+	$headers .= "Bcc: " . $mailToOthers;
+
+	return $headers;
+}
+
+$events = [];
+function addEventToDataLayer($event) {
+    global $events;
+    $events[] = $event;
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 	<meta charset="UTF-8" />
+	<meta property="og:title" content="Badge | The Ultimate 60s and 70s Rock Tribute Band" />
+	<meta property="og:description" content="THE KINKS - BADFINGER - CCR - ELO - THE ROLLING STONES - THE BEATLES - PAUL REVERE AND THE RAIDERS - PAUL MCCARTNEY - TOM PETTY - THE GUESS WHO - THE WHO - THE CARS - THE GRASS ROOTS - THE BYRDS - STEELY DAN - THE MOODY BLUES - BAD COMPANY - EAGLES - CHICAGO - ELTON JOHN - TOMMY JAMES" />
+	<meta property="og:image" content="https://www.badge.group/images/badge-logo.jpg" />
+
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M6LMTKC');</script>
+
 	<link href="images/favicon.ico" type="image/x-icon" rel="icon" />
 	<link href="styles/style.css" type="text/css" rel="stylesheet" />
 	<title>Badge | The Ultimate 60s and 70s Rock Tribute Band</title>
 </head>
 <body>
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6LMTKC"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
 	<div class="nav">
 		<a href="index.php" class="logo"><img src="images/logo-transparent.png" /></a>
 		<div class="mobile-menu-icon">
@@ -19,7 +70,9 @@
 			<li><a href="#music">Music</a></li>
 			<li><a href="#videos">Videos</a></li>
 			<li><a href="#photos">Photos</a></li>
-			<li><a href="#shows">Shows</a></li>
+			<?php if ($hasShow) : ?>
+				<li><a href="#shows">Shows</a></li>
+			<?php endif; ?>
 			<li><a href="#about">About</a></li>
 			<li><a href="#contact">Contact</a></li>
 		</ul>
@@ -71,29 +124,30 @@
 				<a href="#contact" class="button">Book Now</a>
 			</div>
 		</section>
-		<!-- Shows -->
-		<section class="shows" id="shows">
-			<div class="overlay"></div>
-			<h2>Rock with Badge at the Next Show</h2>
-			<div class="container">
-				<div class="show show-1">
-					<span class="date">Nov 20</span>
-					<span class="time">1:00 PM</span>
-					<span class="location">Greenwood Farms</span>
-					<span class="access">Public</span>
-					<span class="button show-1">See details</span>
-					<div class="details">
-						<div class="overlay"></div>
+		<?php if ($hasShow) : ?>
+			<section class="shows" id="shows">
+				<div class="overlay"></div>
+				<h2>Rock with Badge at the Next Show</h2>
+				<div class="container">
+					<div class="show show-1">
 						<span class="date">Nov 20</span>
-						<span class="time">1:00-5:00 PM</span>
+						<span class="time">1:00 PM</span>
 						<span class="location">Greenwood Farms</span>
 						<span class="access">Public</span>
-						<span class="description">4550 Lawrenceville Rd, Loganville, GA 30052</span>
-						<span class="close show-1 button">Close</span>
+						<span class="button show-1">See details</span>
+						<div class="details">
+							<div class="overlay"></div>
+							<span class="date">Nov 20</span>
+							<span class="time">1:00-5:00 PM</span>
+							<span class="location">Greenwood Farms</span>
+							<span class="access">Public</span>
+							<span class="description">4550 Lawrenceville Rd, Loganville, GA 30052</span>
+							<span class="close show-1 button">Close</span>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		<?php endif; ?>
 		<!-- About -->
 		<section class="about" id="about">
 			<h2>About Badge</h2>
@@ -118,79 +172,80 @@
 		<section class="contact" id="contact">
 			<h2>Contact Badge</h2>
 			<p>Contact us for more information on booking Badge for your next event.</p>
-			<form action="<?php $_SERVER["PHP_SELF"]; ?>" method="POST">
+			<form action="<?php echo $_SERVER["PHP_SELF"]; ?>#contact" method="POST">
                 <?php
-                $name = $_POST["name"];
-                $date = $_POST["date"];
-                $phone = $_POST["phone"];
-                $email = $_POST["email"];
-                $comments = $_POST["comments"];
-                $isReadyToSend = true;
-                $isSent = false;
-          
-                if (isset($_POST["submit"])) {
-                    if ($name == null) {
-                        echo '<p class="error">Please enter a name</p>';
-                        $isReadyToSend = false;
-                    }
 
-                    if ($date == null) {
-                        echo '<p class="error">Please enter an event date</p>';
-                        $isReadyToSend = false;
-                    }
+				if (isset($_SESSION["submittedContactForm"])) {
+					echo '<p class="success">You\'re all set! We\'ll be in touch within 24 hours.</p>';
+				} else if (isset($_POST["submit"])) {
+					$missingFields = [];
 
-                    if ($phone == null) {
-                        echo '<p class="error">Please enter a phone number</p>';
-                        $isReadyToSend = false;
-                    }
-                    if ($email == null) {
-                        echo '<p class="error">Please enter an email</p>';
-                        $isReadyToSend = false;
-                    }
+					if (empty(trim($_POST["name"]))) {
+						$missingFields[] = "name";
+					}
 
-                    if ($isReadyToSend) {
-                        $mailTo = "kenmccullough9292@gmail.com";
-                        $subject = "Badge | New Contact";
-                        $headers = "From: \"Badge\" <no-reply@badge.group>\r\n"
-                                . "Reply-To: \"Badge\" <no-reply@badge.group>\r\n"
-                                . "Bcc: jesse.mccullough@hotmail.com";
-                        $message = "Name: " . $name . "\n"
-                                . "Event Date: " . $date . "\n"
-                                . "Phone: " . $phone . "\n"
-                                . "Email: " . $email . "\n"
-                                . "Comments: " . $comments;
+					if (empty(trim($_POST["date"]))) {
+						$missingFields[] = "event date";
+					}
 
-                        $isSent = mail($mailTo, $subject, $message, $headers);
-                        header("Location: index.php?#contact");
-                    }
-                } ?>
+					if (empty(trim($_POST["phone"]))) {
+						$missingFields[] = "phone";
+					}
 
-                <?php if (!$isSent): ?>
-                    <div class="container">
-                        <label for="name"></label>
-                        <input type="text" id="name" name="name" placeholder="Name" value="<?php if (isset($name)) { echo $name; }?>" />
-                    </div>
-                    
-                    <div class="container">
-                        <label for="date"></label>
-                        <input type="text" id="date" name="date" placeholder="Event Date" value="<?php if (isset($date)) { echo $date; }?>" />
-                    </div>
+					if (empty($_POST["email"])) {
+						$missingFields[] = "email";
+					}
 
-                    <div class="container">
-                        <label for="phone"></label>
-                        <input type="phone" id="phone" name="phone" placeholder="Phone" value="<?php if (isset($phone)) { echo $phone; }?>" />
-                    </div>
+					if (!empty($missingFields)) {
+						$fields = "";
+						$missingFieldsCount = count($missingFields);
+						$requiresCommaSeparation = $missingFieldsCount >= 3;
+				
+						if ($missingFieldsCount == 1) {
+							$fields = $missingFields[0];
+						} else {
+							for ($x = 0; $x < $missingFieldsCount; $x++) {
+								if ($requiresCommaSeparation) {
+									if ($x < $missingFieldsCount - 1) { // Any element that's not the last element.
+										$fields .= $missingFields[$x] . ", ";
+									} else if ($x == $missingFieldsCount - 1) { // The element is the element.
+										$fields .= "and " . $missingFields[$x];
+									}
+								} else { // Only two missing fields.
+									if ($x == 0) {
+										$fields .= $missingFields[$x] . " and ";
+									} else {
+										$fields .= $missingFields[$x];
+									}
+								}
+							}
+						}
+					
+						echo '<p class="error">Please enter your ' . $fields . '.</p>';
+						include_once("includes/contact-form-inputs.php");
+					} else {
+						$subject = "New Lead";
+						$headers = getMailHeaders();
+       					$dateFormatted = date_format(date_create($_POST["date"]), "F j, Y");
+                        $message = "Name: " . $_POST["name"] . "\n"
+                                . "Event Date: " . $dateFormatted . "\n"
+                                . "Phone: " . $_POST["phone"] . "\n"
+                                . "Email: " . $_POST["email"] . "\n"
+                                . "Comments: " . $_POST["comments"];
+						
+                        if (mail($mail["address"], $subject, $message, $headers)) {
+							$_SESSION["submittedContactForm"] = true;
+							echo '<p class="success">You\'re all set! We\'ll be in touch within 24 hours.</p>';
+						} else {
+							echo '<p>Something went wrong. Please try again.</p>';
+							include_once("includes/contact-form-inputs.php");
+						}
+					}
+				} else {
+					include_once("includes/contact-form-inputs.php");
+				}
 
-                    <div class="container">
-                        <label for="email"></label>
-                        <input type="email" id="email" name="email" placeholder="Email" value="<?php if (isset($email)) { echo $email; }?>" />
-                    </div>
-
-                    <textarea name="comments" placeholder="Comments (optional)"><?php if (isset($comments)) { echo $comments; }?></textarea>
-                    <input type="submit" name="submit" />
-                <?php else: ?>
-                    <p class="success">You're all set! We'll be in touch within 24 hours.</p>
-                <?php endif; ?>
+				?>
 			</form>
 		</section>
 		<footer id="footer">
@@ -204,49 +259,73 @@
 					<li><a href="#music">Music</a></li>
 					<li><a href="#videos">Videos</a></li>
 					<li><a href="#photos">Photos</a></li>
-					<li><a href="#shows">Shows</a></li>
+					<?php if ($hasShow) : ?>
+						<li><a href="#shows">Shows</a></li>
+					<?php endif; ?>
 					<li><a href="#about">About</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
 			</div>
 			<div class="container cta">
 				<form action="<?php $_SERVER["PHP_SELF"]; ?>" method="POST">
-					<?php
-					$emailFooter = $_POST["email-footer"];
-					$isReadyToSendFooter = true;
-					$isSentFooter = false;
-			
-					if (isset($_POST["submit-footer"])) {
-						if ($emailFooter == null) {
-							echo '<p class="error">Please enter a name</p>';
-							$isReadyToSendFooter = false;
-						}
-
-						if ($isReadyToSendFooter) {
-							$mailTo = "kenmccullough9292@gmail.com";
-							$subject = "Badge | New Email Subscriber";
-							$headers = "From: \"Badge\" <no-reply@badge.group>\r\n"
-									. "Reply-To: \"Badge\" <no-reply@badge.group>\r\n"
-									. "Bcc: jesse.mccullough@hotmail.com";
-							$message = "Email: " . $emailFooter;
-
-							$isSentFooter = mail($mailTo, $subject, $message, $headers);
-							header("Location: index.php?#footer");
-						}
-					} ?>
-
 					<label for="email">Get notified of Badge's shows</label>
-					<?php if (!$isSentFooter): ?>
-						<input type="email" name="email-footer" id="email" placeholder="Email" />
-						<input type="submit" name="submit-footer" value="Notify Me"/>
-					<?php else: ?>
-						<p class="success">You're all set! We'll notify you of Badge's shows.</p>
-					<?php endif; ?>
+					<?php
+
+					if (isset($_SESSION["submittedNotifyForm"]) && false) {
+						echo '<p class="success">You\'re all set! We\'ll notify you of Badge\'s shows.</p>';
+					} else if (isset($_POST["submit-footer"])) {
+						$missingFields = null;
+
+						if (empty($_POST["name-footer"])) {
+							$missingFields = "name";
+							if (empty($_POST["email-footer"])) {
+								$missingFields .= " and email";
+							}
+						} else if (empty($_POST["email-footer"])) {
+							$missingFields = "email";
+						}
+
+						if ($missingFields) {
+							echo '<p class="error">Please enter your ' . $missingFields . '.</p>';
+							include_once("includes/notify-shows-form-inputs.php");
+						} else {
+							$subject = "New Email Subscriber";
+							$headers = getMailHeaders();
+							$message = "Name: " . $_POST["name-footer"] . "\n"
+									. "Email: " . $_POST["email-footer"];
+
+							if (mail($mail["address"], $subject, $message, $headers)) {
+								$_SESSION["submittedNotifyForm"] = true;
+								echo '<p class="success">You\'re all set! We\'ll notify you of Badge\'s shows.</p>';
+							} else {
+								echo '<p>Something went wrong. Please try again.</p>';
+								include_once("includes/notify-shows-form-inputs.php");
+							}
+						}
+					} else {
+						include_once("includes/notify-shows-form-inputs.php");
+					}
+					
+					?>
 				</form>
 			</div>
-			<p class="copyright">Copyright &copy; 2021 Jesse McCullough. All Rights Reserved.</p>
+			<p class="copyright">Copyright &copy; 2022 Jesse McCullough. All Rights Reserved.</p>
 		</footer>
 	</main>
+	<?php
+
+	if (!empty($events)) {
+		echo "<script>";
+		echo "window.dataLayer = window.dataLayer || [];";
+		
+		foreach ($events as $event) {
+			echo "window.dataLayer.push({'event': '" . $event . "'});";
+		}
+
+		echo "</script>";
+	}
+
+	?>
 	<script src="scripts/script.js"></script>
 </body>
 </html>
