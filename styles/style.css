@@ -823,6 +823,11 @@ section.contact input[type="submit"]:hover {
 	background: hsl(0, 0%, 5%);
 }
 
+section.contact input[type="date"] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
 .error {
 	color: red;
 	margin-bottom: 10px;

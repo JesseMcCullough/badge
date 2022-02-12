@@ -7,8 +7,8 @@
 <div class="container">
     <label for="date"></label>
     <input type="date" id="date" name="date" placeholder="Event Date" 
-             value="<?php if (isset($_POST["date"])) { echo $_POST["date"]; }?>"
-             min="<?php echo date("Y-m-d"); ?>"/>
+             value="<?php $todaysDate = date("Y-m-d"); if (isset($_POST["date"])) { echo $_POST["date"]; } else { echo $todaysDate; } ?>"
+             min="<?php echo $todaysDate; ?>"/>
 </div>
 
 <div class="container">

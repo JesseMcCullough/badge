@@ -235,6 +235,7 @@ function addEventToDataLayer($event) {
 						
                         if (mail($mail["address"], $subject, $message, $headers)) {
 							$_SESSION["submittedContactForm"] = true;
+							addEventToDataLayer("submit_contact_form");
 							echo '<p class="success">You\'re all set! We\'ll be in touch within 24 hours.</p>';
 						} else {
 							echo '<p>Something went wrong. Please try again.</p>';
@@ -267,11 +268,11 @@ function addEventToDataLayer($event) {
 				</ul>
 			</div>
 			<div class="container cta">
-				<form action="<?php $_SERVER["PHP_SELF"]; ?>" method="POST">
+				<form action="<?php $_SERVER["PHP_SELF"]; ?>#footer" method="POST">
 					<label for="email">Get notified of Badge's shows</label>
 					<?php
 
-					if (isset($_SESSION["submittedNotifyForm"]) && false) {
+					if (isset($_SESSION["submittedNotifyForm"])) {
 						echo '<p class="success">You\'re all set! We\'ll notify you of Badge\'s shows.</p>';
 					} else if (isset($_POST["submit-footer"])) {
 						$missingFields = null;
@@ -296,6 +297,7 @@ function addEventToDataLayer($event) {
 
 							if (mail($mail["address"], $subject, $message, $headers)) {
 								$_SESSION["submittedNotifyForm"] = true;
+								addEventToDataLayer("submit_notify_form");
 								echo '<p class="success">You\'re all set! We\'ll notify you of Badge\'s shows.</p>';
 							} else {
 								echo '<p>Something went wrong. Please try again.</p>';
