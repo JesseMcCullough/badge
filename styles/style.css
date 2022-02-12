@@ -639,6 +639,9 @@ section.cta-banner .button:hover {
 		min-height: 175px;
 		height: 100%;
 		padding-top: 15px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 
 	section.cta-banner .container:nth-child(1),
@@ -909,7 +912,8 @@ footer .container label {
 	margin-bottom: 5px;
 }
 
-footer .container input[type="email"] {
+footer .container input[type="email"],
+footer .container input[type="text"] {
 	width: 327px;
 	background: hsl(0, 0%, 100%);
 	float: left;
@@ -919,6 +923,10 @@ footer .container input[type="email"] {
 	outline: none;
 	border-radius: 0;
 	-webkit-border-radius: 0;
+}
+
+footer .container input[type="text"] {
+	width: 150px;
 }
 
 footer .container input[type="submit"] {
@@ -950,7 +958,7 @@ footer .success {
 	font-size: 1.5em;
 }
 
-@media screen and (max-width: 734px) {
+@media screen and (max-width: 1000px) {
 	footer .container.links,
 	footer .container.cta {
 		width: 100%;
@@ -964,6 +972,7 @@ footer .success {
 	}
 
 	footer .container.cta input[type="email"],
+	footer .container.cta input[type="text"],
 	footer .container.cta input[type="submit"] {
 		float: none;
 	}
@@ -973,12 +982,14 @@ footer .success {
 	}
 }
 
-@media screen and (max-width: 467px) {
+@media screen and (max-width: 630px) {
+	footer .container.cta input[type="text"],
 	footer .container.cta input[type="submit"] {
 		width: 327px;
 	}
 
-	footer .container.cta input[type="email"] {
+	footer .container.cta input[type="email"],
+	footer .container.cta input[type="text"] {
 		margin-right: 0;
 		margin-bottom: 5px;
 	}
