@@ -40,6 +40,7 @@ function addEventToDataLayer($event) {
 <html>
 <head>
 	<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	<meta name="description" content="THE KINKS - BADFINGER - CCR - ELO - THE ROLLING STONES - THE BEATLES - PAUL REVERE AND THE RAIDERS - PAUL MCCARTNEY - TOM PETTY - THE GUESS WHO - THE WHO - THE CARS - THE GRASS ROOTS - THE BYRDS - STEELY DAN - THE MOODY BLUES - BAD COMPANY - EAGLES - CHICAGO - ELTON JOHN - TOMMY JAMES" />
 	<meta charset="UTF-8" />
 	<meta property="og:title" content="Badge | The Ultimate 60s and 70s Rock Tribute Band" />
 	<meta property="og:description" content="THE KINKS - BADFINGER - CCR - ELO - THE ROLLING STONES - THE BEATLES - PAUL REVERE AND THE RAIDERS - PAUL MCCARTNEY - TOM PETTY - THE GUESS WHO - THE WHO - THE CARS - THE GRASS ROOTS - THE BYRDS - STEELY DAN - THE MOODY BLUES - BAD COMPANY - EAGLES - CHICAGO - ELTON JOHN - TOMMY JAMES" />
@@ -83,10 +84,12 @@ function addEventToDataLayer($event) {
 		<section class="intro">
 			<div class="overlay"></div>
 			<h1>The Ultimate 60s and 70s Rock Tribute Band</h1>
-			<div class="artists">
-				<p id="music">THE KINKS - BADFINGER - CCR - ELO - THE ROLLING STONES - THE BEATLES - PAUL REVERE AND THE RAIDERS - PAUL MCCARTNEY - TOM PETTY - THE GUESS WHO - THE WHO - THE CARS - THE GRASS ROOTS - THE BYRDS - STEELY DAN - THE MOODY BLUES - BAD COMPANY - EAGLES - CHICAGO - ELTON JOHN - TOMMY JAMES</p>
-				<a href="#contact" class="button">Book Badge</a>
-			</div>
+			<span class="artists">The Kinks - Badfinger - CCR - ELO - The Rolling Stones - The Beatles - Paul Revere and the Raiders - Paul McCartney - Tom Petty - The Guess Who - The Who - The Cars - The Grass Roots - The Byrds - Steely Dan - The Moody Blues - Bad Company - Eagles - Chicago - Elton John - Tommy James</span>
+			<a href="#contact" class="button">Book Badge</a>
+		</section>
+		<!-- Description -->
+		<section class="description">
+			<p>Badge provides superior live entertainment for your class reunion party tributing oldies music from that golden age of rock and roll that started classic rock. If you need to book a band that performs a rock tribute to the 60s, or a class reunion party band that plays hit songs from the 70s, the ultimate rock tribute to the 60s and 70s is Atlanta's own, Badge. Their entertaining show is a tribute to the 70s and 60s. Hiring Badge to perform for your next class reunion party, 55 plus community event, or private function assures a fun trip back in time, a retro walk through the era of music where analog was king! Badge is the perfect choice that takes you back in time to relive all those great rock hits from the years you grew up in! Their rock and roll show is perfect for municipal outdoor events. This is one show band that is quite unique! Not your average cover band. This band takes on big songs that you won't hear other cover bands play. Songs by The Beatles, Stones, ELO, Moody Blues, Grass Roots, and so much more! Badge is the Ultimate 60s & 70s Rock Tribute!</p>
 		</section>
 		<!-- Video -->
 		<section class="video" id="video">
