@@ -30,13 +30,6 @@ function toggleShowDetails(showID) {
 	showDetails.classList.toggle("active");
 }
 
-const loadVideosButton = document.querySelector("section.videos .button");
-const videosContainer = document.querySelector("section.videos .container");
-loadVideosButton.addEventListener("click", function() {
-	loadVideosButton.remove();
-	loadContent("extra-videos.php", videosContainer);
-});
-
 const loadPhotosButton = document.querySelector("section.photos .button");
 const photosContainer = document.querySelector("section.photos .container");
 loadPhotosButton.addEventListener("click", function() {
@@ -56,3 +49,58 @@ function loadContent(file, container) {
 
 	xhr.send();
 }
+
+let player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('video-iframe', {
+        events: {
+            'onStateChange': onPlayerStateChange
+         }
+    });
+}
+
+let videoForward = document.getElementById("videoForward");
+let videoBackward = document.getElementById("videoBackward");
+let paused = false;
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING) {
+        paused = false;
+        setTimeout(function() {
+            if (!paused) {
+                videoForward.style.display = "none";
+                videoBackward.style.display = "none";
+            }
+        }, 3000);
+    } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+        videoForward.style.display = "inline";
+        videoBackward.style.display = "inline";
+        paused = true;
+    }
+}
+
+let videos = ["R9pvelP6k0U", "kDrH464kTL4", "Vitf99a34Cc", "nJVqmWPC810",
+        "Hf83ez2HjKA", "GSEbOuwZ8PQ", "1eaq4eJ4AaA", "7qPCViR42lI", "22uh3KkchdY", "dhfSBED3Gec"];
+let videoCounter = 0;
+let iframe = document.querySelector(".video iframe");
+
+videoForward.addEventListener("click", function() {
+    videoCounter++;
+
+    if (videoCounter >= videos.length) {
+        videoCounter = 0;
+    }
+
+    iframe.setAttribute("src", "https://www.youtube.com/embed/" + videos[videoCounter] + "?enablejsapi=1");
+    onYouTubeIframeAPIReady();
+});
+
+videoBackward.addEventListener("click", function() {
+    videoCounter--;
+
+    if (videoCounter < 0) {
+        videoCounter = videos.length - 1;
+    }
+
+    iframe.setAttribute("src", "https://www.youtube.com/embed/" + videos[videoCounter] + "?enablejsapi=1");
+    onYouTubeIframeAPIReady();
+});

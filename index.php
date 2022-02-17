@@ -46,6 +46,8 @@ function addEventToDataLayer($event) {
 	<meta property="og:description" content="THE KINKS - BADFINGER - CCR - ELO - THE ROLLING STONES - THE BEATLES - PAUL REVERE AND THE RAIDERS - PAUL MCCARTNEY - TOM PETTY - THE GUESS WHO - THE WHO - THE CARS - THE GRASS ROOTS - THE BYRDS - STEELY DAN - THE MOODY BLUES - BAD COMPANY - EAGLES - CHICAGO - ELTON JOHN - TOMMY JAMES" />
 	<meta property="og:image" content="https://www.badge.group/images/badge-logo.jpg" />
 
+	<script src="https://www.youtube.com/iframe_api"></script>
+
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -92,19 +94,12 @@ function addEventToDataLayer($event) {
 			<p>Badge provides superior live entertainment for your class reunion party tributing oldies music from that golden age of rock and roll that started classic rock. If you need to book a band that performs a rock tribute to the 60s, or a class reunion party band that plays hit songs from the 70s, the ultimate rock tribute to the 60s and 70s is Atlanta's own, Badge. Their entertaining show is a tribute to the 70s and 60s. Hiring Badge to perform for your next class reunion party, 55 plus community event, or private function assures a fun trip back in time, a retro walk through the era of music where analog was king! Badge is the perfect choice that takes you back in time to relive all those great rock hits from the years you grew up in! Their rock and roll show is perfect for municipal outdoor events. This is one show band that is quite unique! Not your average cover band. This band takes on big songs that you won't hear other cover bands play. Songs by The Beatles, Stones, ELO, Moody Blues, Grass Roots, and so much more! Badge is the Ultimate 60s & 70s Rock Tribute!</p>
 		</section>
 		<!-- Video -->
-		<section class="video" id="video">
+		<section class="video" id="videos">
 			<div class="container">
-				<iframe width="853" height="480" src="https://www.youtube.com/embed/R9pvelP6k0U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<iframe id="video-iframe" width="853" height="480" src="https://www.youtube.com/embed/R9pvelP6k0U?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<span class="video-control" id="videoBackward">&lt;</span>
+        		<span class="video-control" id="videoForward">&gt;</span>
 			</div>
-		</section>
-		<!-- Videos -->
-		<section class="videos" id="videos">
-			<div class="container">
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/kDrH464kTL4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/Vitf99a34Cc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-				<div class="video"><iframe width="853" height="480" src="https://www.youtube.com/embed/nJVqmWPC810" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>	
-			</div>
-			<button type="button" class="button">See More Videos</a>
 		</section>
 		<!-- Photos -->
 		<section class="photos" id="photos">

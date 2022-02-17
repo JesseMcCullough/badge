@@ -711,6 +711,31 @@ section.video .container iframe {
 	max-height: 100vh;
 }
 
+.video-control {
+    background: var(--accent-color);
+    color: hsl(0, 0%, 0%);
+    font-weight: bold;
+    font-size: 2em;
+    padding: 10px 0;
+    padding-left: 40px;
+    padding-right: 30px;
+    position: absolute;
+    top: 43%;
+    cursor: pointer;
+}
+
+#videoForward {
+    right: 0;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+#videoBackward {
+    left: 0;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+}
+
 /*********/
 /* About */
 /*********/
