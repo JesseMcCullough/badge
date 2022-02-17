@@ -2,7 +2,7 @@
 
 session_start();
 
-$configString = file_get_contents("../config.json");
+$configString = file_get_contents("config.json");
 $config = json_decode($configString, true);
 $mail = $config["mail"];
 

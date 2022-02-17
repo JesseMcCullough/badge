@@ -267,7 +267,7 @@ section.intro {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	min-height: calc(100vh - var(--nav-height));
+	min-height: max(calc(100vh - var(--nav-height)), 800px);
 	padding: 40px 0;
 }
 
@@ -309,6 +309,16 @@ section.intro .button {
 @media screen and (max-width: 810px) {
 	section.intro h1 {
 		width: 100%;
+	}
+
+	section.intro .artists {
+		width: 90%;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	section.intro .button {
+		width: 200px;
 	}
 }
 
